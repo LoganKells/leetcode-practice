@@ -31,7 +31,7 @@ def test_two_sum_1():
 
 
 def test_two_sum_2():
-    from easy_programs.two_sum import Solution
+    from easy_problems.two_sum import Solution
     solution = Solution()
     return_values = solution.twoSum(nums=[2, 5, 5, 11], target=10)
 
