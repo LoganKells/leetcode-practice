@@ -1,8 +1,8 @@
 import numpy as np
+import pytest
 
 
 # See: https://leetcode.com/problems/two-sum/
-
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -23,16 +23,10 @@ class Solution(object):
                     return [i, y_index]
 
 
-def test_two_sum_1():
+@pytest.mark.parametrize("test_input, target, expected", [([3, 2, 4], 6, [1, 2]),
+                                                          ([2, 5, 5, 11], 10, [1, 2])])
+def test_two_sum_1(test_input, target, expected):
     solution = Solution()
-    return_values = solution.twoSum(nums=[3, 2, 4], target=6)
+    return_values = solution.twoSum(nums=test_input, target=target)
 
-    assert return_values == [1, 2]
-
-
-def test_two_sum_2():
-    from easy_problems.two_sum import Solution
-    solution = Solution()
-    return_values = solution.twoSum(nums=[2, 5, 5, 11], target=10)
-
-    assert return_values == [1, 2]
+    assert return_values == expected
