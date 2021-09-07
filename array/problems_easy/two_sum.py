@@ -1,10 +1,12 @@
+from typing import List
 import numpy as np
 import pytest
 
 
 # See: https://leetcode.com/problems/two-sum/
-class Solution(object):
-    def twoSum(self, nums, target):
+
+class SolutionNumpy(object):
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
         """
         :type nums: List[int]
         :type target: int
@@ -23,10 +25,35 @@ class Solution(object):
                     return [i, y_index]
 
 
-@pytest.mark.parametrize("test_input, target, expected", [([3, 2, 4], 6, [1, 2]),
-                                                          ([2, 5, 5, 11], 10, [1, 2])])
-def test_two_sum_1(test_input, target, expected):
-    solution = Solution()
+class SolutionFastMap(object):
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # Dynamic (hash)
+
+        # Build a map of each value to it's index
+        map = {}
+        for idx_x, x in enumerate(nums):
+            map[x] = idx_x
+
+        for idx_x, x in enumerate(nums):
+            y = target - x
+            idx_y = map[y] if y in map.keys() else None
+            if idx_y is not None and idx_y != idx_x:
+                return [idx_x, idx_y]
+
+
+test_cases = [([3, 2, 4], 6, [1, 2]), ([2, 5, 5, 11], 10, [1, 2])]
+
+
+@pytest.mark.parametrize("test_input, target, expected", test_cases)
+def test_two_sum_numpy(test_input, target, expected):
+    solution = SolutionNumpy()
+    return_values = solution.twoSum(nums=test_input, target=target)
+
+    assert return_values == expected
+
+@pytest.mark.parametrize("test_input, target, expected", test_cases)
+def test_two_sum_map(test_input, target, expected):
+    solution = SolutionFastMap()
     return_values = solution.twoSum(nums=test_input, target=target)
 
     assert return_values == expected
