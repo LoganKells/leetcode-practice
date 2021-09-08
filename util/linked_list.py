@@ -16,3 +16,12 @@ def build_linked_list(nums: List[int]) -> ListNode:
         cursor.next = ListNode(val=value_node)
         cursor = cursor.next
     return head
+
+
+def list_from_linked_list(head: ListNode) -> List[int]:
+    nums = []
+    cursor = head
+    while cursor:
+        nums.append(cursor.val)
+        cursor = cursor.next
+    return nums
