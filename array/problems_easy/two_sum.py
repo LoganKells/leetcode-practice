@@ -32,13 +32,12 @@ class SolutionFastMap(object):
         # Build a map of each value to it's index
         map = {}
         for idx_x, x in enumerate(nums):
-            map[x] = idx_x
-
-        for idx_x, x in enumerate(nums):
             y = target - x
-            idx_y = map[y] if y in map.keys() else None
-            if idx_y is not None and idx_y != idx_x:
-                return [idx_x, idx_y]
+            if y in map.keys():
+                return [idx_x, map[y]]
+            else:
+                map[x] = idx_x
+        return []
 
 
 test_cases = [([3, 2, 4], 6, [1, 2]), ([2, 5, 5, 11], 10, [1, 2])]
@@ -51,9 +50,10 @@ def test_two_sum_numpy(test_input, target, expected):
 
     assert return_values == expected
 
+
 @pytest.mark.parametrize("test_input, target, expected", test_cases)
 def test_two_sum_map(test_input, target, expected):
     solution = SolutionFastMap()
     return_values = solution.twoSum(nums=test_input, target=target)
-
+    return_values.sort()
     assert return_values == expected
