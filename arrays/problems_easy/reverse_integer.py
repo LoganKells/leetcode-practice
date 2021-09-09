@@ -1,6 +1,9 @@
+import math
+
+# 7. Reverse Integer
 # see: https://leetcode.com/problems/reverse-integer/
 # solution: https://www.youtube.com/watch?v=HAgLH58IgJQ&t=11s
-import math
+
 
 # Define the max and min 32 bit signed integer
 MAX_INT = 2 ** 31 - 1
