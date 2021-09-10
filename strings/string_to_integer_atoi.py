@@ -64,12 +64,87 @@ class Solution(object):
                 return 0
 
 
-@pytest.mark.parametrize("test_input, expected", [("-13+8", -13), (" ", 0), ("3.14159", 3), ("00000-42a1234", 0), ("1", 1), ("", 0), ("-+12", 0),
-                                                  ("   -42", -42), ("42", 42),
-                                                  ("4193 with words", 4193),
-                                                  ("-91283472332", -2147483648), ("words and 987", 0),
-                                                  ])
+class Solution2:
+    def myAtoi(self, s: str) -> int:
+        # ignore leading whitespace
+        first_c = s[0] if s != "" else None
+        while first_c == " ":
+            s = s[1:]
+            first_c = s[0] if s != "" else None
+
+        # Handle if s is now none
+        if s == "":
+            return 0
+
+        # Check sign
+        sign = -1 if s[0] == "-" else 1
+
+        # Strip the sign
+        if s[0] in ("-", "+", "0"):
+            s = s[1:]
+
+        # Evaluate the length of the return int, which is the len until the first non integer char
+        length = 0
+        i = 0
+        # Handle if s is now none
+        if s == "":
+            return 0
+        c = s[length]
+        while 48 <= ord(c) <= 57:
+            length += 1
+            c = s[length] if length < len(s) else "q"
+
+        # Calculate the number as a float: 1.3 -> 13 later
+        num = 0
+        level = length - 1
+        for i in range(length):
+            c = s[i] if i < length else "q"
+            if 48 <= ord(c) <= 57:
+                new_val = int(c)
+                num += new_val * 10 ** level
+                level -= 1
+            else:
+                break
+
+        # Convert from float to int: 1.3 -> 13
+        num_int = int(sign * num * (10 ** (-1 * level - 1)))
+        if num_int > MAX_INT:
+            return MAX_INT
+        elif num_int < MIN_INT:
+            return MIN_INT
+        else:
+            return num_int
+
+
+test_case = [("   -42", -42)]
+test_cases = [("+", 0),
+    (" -1010023630o4", -1010023630),
+                ("", 0),
+              ("   -42", -42),
+              ("-13+8", -13),
+              (" ", 0),
+              ("3.14159", 3),
+              ("00000-42a1234", 0),
+              ("1", 1),
+              ("", 0),
+              ("-+12", 0),
+              ("42", 42),
+              ("4193 with words", 4193),
+              ("-91283472332", -2147483648),
+              ("words and 987", 0),
+              ("000000000000000000000000000011", 11)
+              ]
+
+
+@pytest.mark.parametrize("test_input, expected", test_cases)
 def test_my_atoi(test_input, expected):
     sol = Solution()
+    value = sol.myAtoi(s=test_input)
+    assert value == expected
+
+
+@pytest.mark.parametrize("test_input, expected", test_cases)
+def test_my_atoi(test_input, expected):
+    sol = Solution2()
     value = sol.myAtoi(s=test_input)
     assert value == expected
