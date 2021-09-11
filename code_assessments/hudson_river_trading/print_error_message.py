@@ -43,32 +43,33 @@ class Solution:
         idx_error = len(line_above) + idx_error_from_start
         error_message = "".join(error_message_lines)
 
-        # Clip the left and right side with z
-        left_side = error_message[:idx_error]
-        left_side_rev = left_side[::-1]
-        end_left = min(len(left_side), z)
-        left_side_rev = left_side_rev[:end_left]
-        left_side = left_side_rev[::-1]
-
-        right_side = error_message[idx_error + 1:]
-        right_side_rev = right_side[::-1]
-        end_right = min(len(right_side), z)
-        right_side_rev = right_side_rev[:end_right]
-        right_side = right_side_rev[::-1]
+        # Clip the left and right side with z.
+        # 1. split left side and right side around the error idx.
+        left_side, right_side = error_message[:idx_error], error_message[idx_error + 1:]
+        # 2. Clip outward from the error (i.e. reverse indexing)
+        end_left, end_right = min(len(left_side), z), min(len(right_side), z)
+        left_side_rev, right_side_rev = left_side[::-1], right_side[::-1]
+        left_side_rev, right_side_rev = left_side_rev[:end_left], right_side_rev[:end_right]
+        # 3. Reverse the strings back in the original order
+        left_side, right_side = left_side_rev[::-1], right_side_rev[::-1]
 
         # Create the line with the ^ carrot just after the error
         spaces = []
-        for i in range(len(left_side)):
-            spaces.append(" ")
-        spaces.append("^\n")
-        line_w_carrot = "".join(spaces)
-
+        if left_side == "":
+            line_w_carrot = "\n^\n"
+        else:
+            count_spaces = min(len(left_side), idx_error_from_start)
+            for i in range(count_spaces):
+                spaces.append(" ")
+            spaces.append("^\n")
+            line_w_carrot = "".join(spaces)
 
         # Return clipped error message
-        error_message_lines = (left_side, s[y], "\n", line_w_carrot, right_side)
+        error_message_lines = (left_side, s[y], line_w_carrot, right_side)
         error_message_final = "".join(error_message_lines)
 
         return error_message_final
+
 
 # "int main() {\n"
 # "    return 0\n"
@@ -76,13 +77,14 @@ class Solution:
 # "}\n"
 
 
-test_cases = [("123",
-               1, 0,
-               "2\n" + "^\n"),
-              ("// comment\n" + "int main() {\n" + "    return 0\n" + "}\n",
-               36, 126,
-               "int main() {\n" + "    return 0\n" + "            ^\n" + "}\n")
-              ]
+test_cases = [
+    ("// comment\n" + "int main() {\n" + "    return 0\n" + "}\n",
+     36, 126,
+     "int main() {\n" + "    return 0\n" + "            ^\n" + "}\n"),
+    ("123",
+     1, 0,
+     "2\n" + "^\n"),
+]
 
 
 @pytest.mark.parametrize("s, y, z, expected", test_cases)
