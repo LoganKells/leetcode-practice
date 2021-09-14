@@ -23,14 +23,16 @@ def build_tree_level_order(tree_values: List[int]) -> Optional[TreeNode]:
     nodes_in_level = 2
     while len(roots_level) != 0 and len(tree_values) != 0:
         new_root = roots_level.pop(0)
-        l = TreeNode(val=tree_values.pop(0))
-        r = TreeNode(val=tree_values.pop(0))
-        new_root.left = l
-        new_root.right = r
-        if l.val is not None:
-            roots_level.append(l)
-        if r.val is not None:
-            roots_level.append(r)
+        l_value = tree_values.pop(0)
+        r_value = tree_values.pop(0)
+        node_left = TreeNode(val=l_value) if l_value is not None else None
+        node_right = TreeNode(val=r_value) if r_value is not None else None
+        new_root.left = node_left
+        new_root.right = node_right
+        if node_left is not None:
+            roots_level.append(node_left)
+        if node_right is not None:
+            roots_level.append(node_right)
     return root
 
 
