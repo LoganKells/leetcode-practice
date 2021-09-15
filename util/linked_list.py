@@ -24,4 +24,5 @@ def list_from_linked_list(head: ListNode) -> List[int]:
     while cursor:
         nums.append(cursor.val)
         cursor = cursor.next
+    nums = nums if len(nums) > 0 else None
     return nums
