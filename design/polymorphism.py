@@ -24,11 +24,11 @@ class Computer:
         self.cpu_ghz = ghz
         self.cost = cost
 
-    # C - Operator overloading
+    # A - Method Overriding
     def __len__(self):  # Operator overloading
         return self.storage_size
 
-    # C - Operator overloading
+    # A - Method Overriding
     def __lt__(self, other):
         value_ratio = self.value_ratio()
         value_ratio_other = other.value_ratio()
@@ -51,7 +51,7 @@ class Laptop(Computer):
 
 # B - Method Overloading
 # https://www.geeksforgeeks.org/python-method-overloading/
-from multipledispatch import dispatch
+# https://github.com/mrocklin/multipledispatch
 import multipledispatch
 
 
