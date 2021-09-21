@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 class ListNode:
@@ -7,7 +7,10 @@ class ListNode:
         self.next = next
 
 
-def build_linked_list(nums: List[int]) -> ListNode:
+def build_linked_list(nums: List[int]) -> Optional[ListNode]:
+    if not nums:
+        return None
+
     value_head = nums.pop(0)
     head = ListNode(val=value_head)
     cursor = head
@@ -19,6 +22,8 @@ def build_linked_list(nums: List[int]) -> ListNode:
 
 
 def list_from_linked_list(head: ListNode) -> List[int]:
+    if not head:
+        return []
     nums = []
     cursor = head
     while cursor:
