@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "leetcode"
+version = "0.1.0"
+description = "leetcode problems solved with python"
+authors = ["LoganKells <lkells@outlook.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9.13"
+pytest = "^7"
+numpy = "^1.23"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
