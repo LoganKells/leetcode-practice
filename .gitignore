@@ -750,6 +750,7 @@ buildNumber.properties
 
 ### Gradle ###
 .gradle
+**/gradle/
 **/build/
 **/bin/
 !src/**/build/
