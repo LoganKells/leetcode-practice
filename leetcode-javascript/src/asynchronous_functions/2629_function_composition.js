@@ -59,6 +59,8 @@ var compose = function(functions) {
             x = accumulator
         }, x)
 
+        // From description "The function composition of an
+        // empty list of functions is the identity function f(x) = x."
         return x
     }
 }
