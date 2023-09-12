@@ -64,6 +64,7 @@
  * @return {number}
  */
 var reduce = function(nums, fn, init) {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
     return nums.reduce(
         (accumulator, currentValue) =>
             fn(accumulator, currentValue), init,
