@@ -31,6 +31,7 @@ const myArrayType = {
     }
 }
 
+
 export {myArrayType}
 
 
