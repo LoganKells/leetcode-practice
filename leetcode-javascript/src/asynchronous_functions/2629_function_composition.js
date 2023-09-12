@@ -49,12 +49,14 @@
 /**
  * @param {Function[]} functions
  * @return {Function}
+ * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight
  */
 var compose = function(functions) {
     return function(x) {
-        functions.reduceRight((previousValue, currentValue) => {
-            previousValue = currentValue(x)
-            x = previousValue
+        // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight
+        functions.reduceRight((accumulator, currentValue) => {
+            accumulator = currentValue(x)
+            x = accumulator
         }, x)
 
         return x
