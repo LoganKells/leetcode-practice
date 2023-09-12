@@ -1,0 +1,15 @@
+{
+  // https://babeljs.io/docs/babel-plugin-transform-modules-commonjs
+  "plugins": [
+    ["@babel/plugin-transform-modules-commonjs", {
+      "allowTopLevelThis": true
+    }]
+  ],
+  // The following is technically not required if we have set
+  // the plugins above.
+  "env": {
+    "test": {
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
+    }
+  }
+}

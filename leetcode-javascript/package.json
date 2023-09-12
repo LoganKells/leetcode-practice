@@ -1,0 +1,20 @@
+{
+  "name": "leetcode-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/operators_types_keywords/primitives.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "*",
+    "jest": "^29.6.3",
+    "ts-jest": "*",
+    "@types/jest": "*",
+    "@babel/plugin-transform-modules-commonjs": "*"
+  }
+}
