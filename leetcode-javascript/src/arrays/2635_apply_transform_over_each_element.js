@@ -43,8 +43,16 @@
  * @param {Function} fn
  * @return {number[]}
  */
-var map = function (arr, fn) {
+const map = function (arr, fn) {
     return arr.map((element, index) => fn(element, index))
 }
 
-export { map }
+function map2(arr, fn) {
+    let data = []
+    arr.forEach((value, index) => {
+        data.push(fn(value, index))
+    })
+    return data
+}
+
+export { map, map2 }
