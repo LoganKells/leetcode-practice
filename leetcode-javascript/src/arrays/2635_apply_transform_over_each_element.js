@@ -55,4 +55,19 @@ function map2(arr, fn) {
     return data
 }
 
-export { map, map2 }
+/**
+ * This has the highest efficiency (memory and runtime)
+ * by using the pre-existing array rather than making a new array.
+ * for storing the results.
+ * @param {number[]} arr
+ * @param {Function} fn
+ * @return {number[]}
+ */
+var map3 = function (arr, fn) {
+    arr.forEach((value, index) => {
+        arr[index] = fn(value, index)
+    })
+    return arr
+}
+
+export { map, map2, map3 }
